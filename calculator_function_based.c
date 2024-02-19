@@ -2,77 +2,103 @@
 #include <stdlib.h>
 #include <string.h>
 
-int add(int a, int b){
-	int c;
+void find_speed(float *d, float *t, float *speed)
+{
+    printf("Val for d:\n");
+    scanf("%f", d);
+    printf("Val for t:\n");
+    scanf("%f", t);
 
-	c=a+b;
-	printf("Addition of a and b is %d", c);
+    if (*t == 0)
+    {
+        printf("Zero value error in time\n");
+    }
+    else
+    {
+        *speed = *d / *t;
+        printf("The speed is: %.2f m/s\n", *speed);
+    }
 }
 
-int sub( int a, int b){
-	int c;
+void find_acceleration(float *a, float *u, float *v, float *t)
+{
+    printf("Val for u(m/s):\n");
+    scanf("%f", u);
+    printf("Val for v(m/s):\n");
+    scanf("%f", v);
+    printf("Val for t(s):\n");
+    scanf("%f", t);
 
-	c=a-b;
-	printf("Subtraction of a and b is %d", c);
-
+    if (*t == 0)
+    {
+        printf("Zero value error in time\n");
+    }
+    else
+    {
+        *a = (*v - *u) / *t;
+        printf("The value of acceleration is: %.2f m/s^2\n", *a);
+    }
 }
 
-int mult(int a, int b){
-	int c;
+void find_height(float *u, float g, float *s)
+{
+    printf("Val of u (m/s):\n");
+    scanf("%f", u);
 
-	c=a*b;
-	printf("Multiplication of a and b is %d",c);
+    *s = (*u) * (*u) / (2 * g);
+    printf("Height reached by object when thrown with u: %.2f (m/s) is %.2f (m)\n", *u, *s);
 }
 
-int divide(int a, int b){
-	int c;
+void find_kineticenergy(float *speed, float *m, float *K )
+{
 
-	if (b==0){
+	printf("Val of u(m/s):\n");
+	scanf("%f",speed);
+	printf("Val of m(kg):\n");
+	scanf("%f",m);
 
-		printf("Zero error\n");
-	}
-
-	else {
-		c=a/b;
-		printf("Division of a and b is %d", c);
-	}
-	
-	
+	* K=(0.5) * (* m) * (* speed) * (* speed);
+	printf("KE of object is : %.2f Joules.",* K);
 }
 
-int main(){
+int main()
+{
+    printf("This is a simple physics calculator\nThere will be more improvements in the future.");
 
-	char what_to_do[50];
-	int a, b;
-	printf("Val a:\n");
-	scanf("%d",&a);
-	printf("Val b:\n");
-	scanf("%d", &b);
+    float speed, d, t, s, v, u, h, a, m, K;
+    const float G = 6.6e-11;
+    const float g = 9.8;
 
-	
-	printf("Operation to do:\n add, \n sub, \n mult, \n divide\n:");
-	scanf("%s", what_to_do);
-	
-	if ( strcmp(what_to_do,"add" )==0)
-	{
-		add(a,b);
-	}
+    char what_to_do[100];
 
-	else if ( strcmp(what_to_do,"sub")==0)
+    printf("Which problem to do\n");
+    printf("Available problems: \n find_speed, \n find_acceleration,\n find_height\n find_kineticenergy\n");
+    printf("What to do:?\n");
+    scanf("%s", what_to_do);
+
+    if (strcmp(what_to_do, "find_speed") == 0)
+    {
+        printf("Find speed from distance and time given\n");
+        find_speed(&d, &t, &speed);
+    }
+    else if (strcmp(what_to_do, "find_acceleration") == 0)
+    {
+        printf("Find acceleration from u, v, t\n");
+        find_acceleration(&a, &u, &v, &t);
+    }
+    else if (strcmp(what_to_do, "find_height") == 0)
+    {
+        printf("Find height reached by an object thrown upwards with velocity u\n");
+        find_height(&u, g, &s);
+    }
+
+	else if ( strcmp(what_to_do, "find_kineticenergy")==0)
 	{
-		sub(a,b);
+		printf("Find KE.\n");
+		find_kineticenergy(&speed, &m, &K);
 	}
 	
-	else if ( strcmp(what_to_do,"mult")==0)
-	{
-		mult(a,b);
-	}
-	
-	else if ( strcmp(what_to_do,"divide")==0)
-	{
-		divide(a,b);
-	}
-	
-	
-	return 0;
+    return 0;
+
+
 }
