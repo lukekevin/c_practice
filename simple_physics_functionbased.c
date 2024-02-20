@@ -118,3 +118,4 @@ int main()
     return 0;
 
 }
+// enter -lm flag in terminal while running the code so math function sqrt is used properly
