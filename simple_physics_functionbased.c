@@ -53,7 +53,7 @@ void find_height(float *u, float g, float *s)
 void kineticenergy(float *speed, float *m, float *K )
 {
     char what_more_to_do[100];
-    printf("What more to do:\n");
+    printf("What more to do? find_v_from_K, find_K_from_v\n");
     scanf("%s", what_more_to_do);
     if ( strcmp(what_more_to_do, "find_v_from_K")==0)
     {
@@ -75,21 +75,34 @@ void kineticenergy(float *speed, float *m, float *K )
         printf("KE of object is : %.2f Joules.",* K);
         
     }
+
     	
+}
+
+
+void potential_energy(float *m, float *h, float *P, float g)
+{
+    printf("Enter mass(kg):");
+    scanf("%f\n",m);
+    printf("Enter height (m):");
+    scanf("%f\n",h);
+
+    *P=(*m) *(* h)*g;
+    printf("PE is: %f Joules.",*P);
+
 }
 
 int main()
 {
     printf("This is a simple physics calculator\nThere will be more improvements in the future.");
 
-    float speed, d, t, s, v, u, h, a, m, K;
+    float speed, d, t, s, v, u, h, a, m, K, P;
     const float G = 6.6e-11;
     const float g = 9.8;
 
     char what_to_do[100];
-    char what_more_to_do[20];
     printf("Which problem to do\n");
-    printf("Available problems: \n find_speed, \n find_acceleration,\n find_height\n find_kineticenergy\n");
+    printf("Available problems:  find_speed,find_acceleration,find_height,kineticenergy,potentialenergy\n");
     printf("What to do:?\n");
     scanf("%s", what_to_do);
 
@@ -111,11 +124,17 @@ int main()
 
 	else if ( strcmp(what_to_do, "find_kineticenergy")==0)
 	{   
+
+        
 		printf("Kinetic energy calculations: find_v_from_K, find_K_from_v.\n");
 		kineticenergy(&speed, &m, &K);
 	}
 	
+    else if ( strcmp(what_to_do,"potentialenergy")==0)
+    {
+        printf("Potential energy calculations from m,g,h");
+        potential_energy(&m,&h,&P,g);
+    }
+    
     return 0;
-
 }
-// enter -lm flag in terminal while running the code so math function sqrt is used properly
