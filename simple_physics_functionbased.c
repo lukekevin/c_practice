@@ -3,7 +3,7 @@
 #include <string.h>
 #include <math.h>
 
-void find_speed(float *d, float *t, float *speed)
+float find_speed(float *d, float *t, float *speed)
 {
     printf("Val for d:\n");
     scanf("%f", d);
@@ -21,7 +21,7 @@ void find_speed(float *d, float *t, float *speed)
     }
 }
 
-void find_acceleration(float *a, float *u, float *v, float *t)
+float find_acceleration(float *a, float *u, float *v, float *t)
 {
     printf("Val for u(m/s):\n");
     scanf("%f", u);
@@ -41,7 +41,7 @@ void find_acceleration(float *a, float *u, float *v, float *t)
     }
 }
 
-void find_height(float *u, float g, float *s)
+float find_height(float *u, float g, float *s)
 {
     printf("Val of u (m/s):\n");
     scanf("%f", u);
@@ -76,9 +76,7 @@ float kineticenergy(float *speed, float *m, float *K )
         printf("\nKE of object is : %.2f Joules.\n",* K);
         return *K;
         
-    }
-
-    	
+    }	
 }
 
 
@@ -94,17 +92,34 @@ float potential_energy(float *m, float *h, float *P, float g)
     return *P;
 }
 
+float gravitation( float *m, float *h, float *Force, float G,float Me)
+{
+    printf("Enter mass(kg):");
+    scanf("%f",m);
+    printf("Enter height (m):");
+    scanf("%f",h);
+
+    float radius= *h+6400000;
+
+    
+    *Force=G * Me * *m / pow ( radius,2);
+    printf("The force is %.2fN",*Force);
+
+    
+}
+
 int main()
 {
     printf("This is a simple physics calculator\nThere will be more improvements in the future.");
 
-    float speed, d, t, s, v, u, h, a, m, K, P;
-    const float G = 6.6e-11;
+    float speed, d, t, s, v, u, h, a, m, K, P, Force;
+    const float G =  6.674 * pow(10, -11);
     const float g = 9.8;
+    const float Me= 5.972 * pow(10, 24);
 
     char what_to_do[100];
     printf("Which problem to do\n");
-    printf("Available problems:  find_speed,find_acceleration,find_height,kineticenergy,potentialenergy, totalenergy\n");
+    printf("Available problems:  find_speed,find_acceleration,find_height,kineticenergy,potentialenergy, totalenergy, gravitational_force\n");
     printf("What to do:?\n");
     scanf("%s", what_to_do);
 
@@ -145,8 +160,14 @@ int main()
         float TE=K+P;
         printf("The TE of object is %.2f J",TE);
     }
+
+    else if ( strcmp(what_to_do, "gravitational_force")==0)
+    {   
+        gravitation(&m,&h,&Force,G,Me);
+        
+    }
+    
     
     return 0;
 
 }
-// made changes in function data types from void to int so the return value can  be obtained for work in other functions
