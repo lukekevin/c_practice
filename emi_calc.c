@@ -61,5 +61,9 @@ int main ()
 
 
         return 0;
+                
 
         }
+
+// gcc emi_calc.c -o emi_calc -lm  && ./emi_calc   this is the command for terminal when using math.h file
+
